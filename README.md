@@ -33,7 +33,7 @@ $ sudo usermod -aG docker $USER
 
 first, clone this project in your "WORKING_DIRECTORY"
 ```shell
-$ git clone https://github.com/islem19/AOSP-Build-on-Docker.git
+$ git clone https://github.com/victorrattis/AOSP-Build-on-Docker.git
 ```
 
 ```shell
@@ -44,9 +44,15 @@ $ make
 
 Use it as a independent shell, and mount a local path to save source and result:
 ```shell
-$ docker run --rm -it -v /path/to/source:/aosp sabdelkader/aosp
+$ docker run --rm -it -v /path/to/source:/aosp build/aosp
 ##### or you can run the script
 $ bash run.sh
+```
+
+**Obs:** You can limite the usage cpu:
+```shell
+##### Limiting the usage cpu to 4
+$ docker run --rm -it --cpus="4.0" -v /path/to/source:/aosp build/aosp
 ```
 
 You can map the location of AOSP source code in your host machine with the path in your container. if you haven't got your AOSP yet, you can get it using repo command: 
@@ -57,9 +63,11 @@ You can map the location of AOSP source code in your host machine with the path 
 $ git config --global user.name "Your Name"
 $ git config --global user.email "you@example.com"
 ####### checkout a branch for AOSP 7.1: android-7.1.2_r39
-$ repo init -u https://android.googlesource.com/platform/manifest -b android-7.1.2_r39
+$ repo init --depth=1 -u https://android.googlesource.com/platform/manifest -b android-7.1.1_r57
 $ repo sync
 ```
+
+**obs:** Use `--depth=1` to speed up the sync because it will download one commit for each git project.
 
 ## Building AOSP ROM
 

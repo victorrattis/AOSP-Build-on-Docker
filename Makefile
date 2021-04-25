@@ -1,5 +1,5 @@
 DOCKER = docker
-IMAGE = sabdelkader/aosp
+IMAGE = build/aosp
 
 all: Dockerfile
 		$(DOCKER) build -t $(IMAGE) .
